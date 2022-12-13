@@ -1,8 +1,9 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 
-def no_c(my_list):
-    new_list = ""
-    for x in my_string:
-        if x not in "cC":
-            new_str += x
-    return(new_string)
+
+def no_c(my_string):
+    new_str = ""
+    for i in my_string:
+        if i not in "cC":
+            new_str += i
+    return (new_str)
