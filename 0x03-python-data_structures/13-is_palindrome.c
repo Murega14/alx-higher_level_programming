@@ -1,40 +1,54 @@
 #include "lists.h"
-#include <string.h>
-#include <stdio.h>
-#include <stdlib.h>
 
 /**
-  * is_palindrome - A function that checks if a list is a palindrome.
-  * @head: The pointer to the head of the list.
-  * Return: 0 if list not a palindrome, 1 if it is.
-  */
-int is_palindrome(listint_t **head)
+* list_len - finds no. of elements ina linked list.
+* @h: pointer to linked list.
+*
+* Return: number of elements in linked list.
+*/
+size_t list_len(listint_t *h)
 {
-	listint_t *tmp = *head;
-	int nodes = 0, i = 0, *array = NULL;
+	size_t  nodes = 0;
 
-	if (*head == NULL || head == NULL || (*head)->next == NULL)
-		return (1);
-	while (tmp)
+	if (h == NULL)
+		return (0);
+	while (h != NULL)
 	{
 		nodes++;
-		tmp = tmp->next;
+		h = h->next;
 	}
-	array = malloc(sizeof(int) * nodes);
-	tmp = *head;
-	while (tmp)
+	return (nodes);
+}
+
+/**
+* is_palindrome - checks if a singly linked list is a palindrome.
+* @head: double pointert to head of d-list.
+*
+* Return: 1 if palindrome, 0 otherwise.
+*/
+int is_palindrome(listint_t **head)
+{
+	int *nArr, i = 0, j = 0, len = 0;
+	listint_t *temp;
+
+	if (*head == NULL)
+		return (1);
+	temp = *head;
+	len = list_len(temp);
+	nArr = (int *)malloc(sizeof(int) * len);
+	if (nArr == NULL)
+		return (2);
+	temp = *head;
+	while (temp != NULL)
 	{
-		array[i++] = tmp->n;
-		tmp = tmp->next;
+		nArr[j] = temp->n;
+		j++;
+		temp = temp->next;
 	}
-	for (i = 0; i < nodes / 2; i++)
+	for (i = 0, j = len - 1; i < j; i++, j--)
 	{
-		if (array[i] != array[nodes - 1 - i])
-		{
-			free(array);
+		if (nArr[i] != nArr[j])
 			return (0);
-		}
 	}
-	free(array);
 	return (1);
 }
